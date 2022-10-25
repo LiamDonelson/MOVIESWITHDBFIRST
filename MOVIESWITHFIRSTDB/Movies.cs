@@ -15,49 +15,48 @@ namespace MOVIESWITHFIRSTDB
             MoviesContext mc = new MoviesContext();
             List<MovieInventory> movies = mc.MovieInventories.ToList();
             List<string> search = new List<string>();
-      
-            
-                Console.WriteLine("Please type in a Genere that you would like to search for, we have:");
 
 
-                // prints all of 
-                List<string> movieGeneres = new List<string>();
-                foreach (MovieInventory movie in movies)
+            Console.WriteLine("Please type in a Genere that you would like to search for, we have:");
+
+
+            // prints all of 
+            List<string> movieGeneres = new List<string>();
+            foreach (MovieInventory movie in movies)
+            {
+                if (movieGeneres.Contains(movie.Genere) == false)
                 {
-                    if (movieGeneres.Contains(movie.Genere) == false)
-                    {
-                        movieGeneres.Add(movie.Genere);
-                    }
+                    movieGeneres.Add(movie.Genere);
                 }
+            }
 
-                // prints all movie generes
-                foreach (string mo in movieGeneres)
+            // prints all movie generes
+            foreach (string mo in movieGeneres)
+            {
+                Console.WriteLine(mo);
+            }
+
+
+
+            Console.WriteLine("-----------------------------------------------------------------");
+            string userinput = Console.ReadLine();
+
+            Console.WriteLine("Alrighty! Here are the movies we have in that genere!");
+            List<string> SelectedMovies = new List<string>();
+            foreach (MovieInventory movie in movies)
+            {
+                if (movie.Genere.Contains(userinput))
                 {
-                    Console.WriteLine(mo);
+                    search.Add(movie.MovieName);
                 }
-
-
-
-                Console.WriteLine("-----------------------------------------------------------------");
-                string userinput = Console.ReadLine();
-
-                    Console.WriteLine("Alrighty! Here are the movies we have in that genere!");
-                    List<string> SelectedMovies = new List<string>();
-                    foreach (MovieInventory movie in movies)
-                    {
-
-                        if (movie.Genere.Contains(userinput))
-                        {
-                            search.Add(movie.MovieName);
-                        }
-                    }
+            }
             return search;
         }
 
 
         public List<string> SearchbyTitle()
         {
-            List<MovieInventory> search = new List <MovieInventory>();
+            List<MovieInventory> search = new List<MovieInventory>();
             MoviesContext mc = new MoviesContext();
 
             Console.WriteLine("Please type in a Title that you would like to search for");
@@ -84,18 +83,18 @@ namespace MOVIESWITHFIRSTDB
 
             Console.WriteLine("Select a Movie");
             int i = 1;
-            foreach(string movie in hellofools)
+            foreach (string movie in hellofools)
             {
                 Console.WriteLine($"|{i}| {movie}");
                 i++;
             }
 
             int userinput = int.Parse(Console.ReadLine());
-            string chosenmovie = hellofools[userinput-1];
+            string chosenmovie = hellofools[userinput - 1];
 
             foreach (MovieInventory moves in movies)
             {
-                
+
                 if (chosenmovie.Equals(moves.MovieName))
                 {
                     Console.WriteLine($"Movie Title:{moves.MovieName} \nMovie Genere:{moves.Genere} \nMovie Run Time: {moves.RunTime}");
